@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto; /* Adjusted the margin-top value */
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        /* Added CSS for the form */
+        form {
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .btn-save {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn-save:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <title>New Employee</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Add a new Employee</h1>
+        <form method="post" action="/employee/add">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="department">Department:</label>
+                <select id="department" name="department" required>
+                    <option value="WebDev">WebDev</option>
+                    <option value="Product Support">Product Support</option>
+                    <option value="Cloud Computing">Cloud Computing</option>
+                    <!-- Add more department options as needed -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="manager">Manager:</label>
+                <input type="text" id="manager" name="manager">
+            </div>
+            <button class="btn-save" type="submit">Save</button>
+        </form>
+    </div>
+</body>
+</html>

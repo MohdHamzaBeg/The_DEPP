@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 50px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        /* Added CSS for the table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px; /* Add margin-top to the table */
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px; /* Increase padding for better spacing */
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e0e0e0;
+        }
+        .back-button {
+    	float: right; /* Float the button to the right */
+    	background-color: #5DADE2;
+    	color: white;
+    	border: none;
+    	border-radius: 20px;
+    	padding: 10px 20px;
+    	font-size: 16px;
+    	cursor: pointer;
+    	text-decoration: none;
+}
+		.edit-button, .delete-button{
+    	background-color: #4CAF50;
+    	color: white;
+    	border: none;
+    	border-radius: 20px;
+    	padding: 10px 20px;
+    	font-size: 16px;
+    	cursor: pointer;
+    	text-decoration: none;
+		}
+
+		.edit-button:hover, .delete-button:hover{
+		background-color:#45a049;
+		}
+        .back-button:hover {
+            background-color: #87CEEB;
+        }
+    </style>
+    <title>Employee Details</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Employee Details</h1>
+        <table>
+            <tr>
+                <th>Employee ID:</th>
+                <td th:text="${employee.id}"></td>
+            </tr>
+            <tr>
+                <th>Name:</th>
+                <td th:text="${employee.name}"></td>
+            </tr>
+            <tr>
+                <th>Email:</th>
+                <td th:text="${employee.email}"></td>
+            </tr>
+            <tr>
+                <th>Department:</th>
+                <td th:text="${employee.department}"></td>
+            </tr>
+            <tr>
+                <th>Reports To:</th>
+                <td th:text="${employee.manager}"></td>
+            </tr>
+        </table>
+        <br>
+        <br>
+        <button class="edit-button" th:onclick="|window.location.href='/employee/updateform/${employee.id}'|">Edit</button>
+        <button class="back-button" th:onclick="|window.location.href='/employee/home'|">Back</button>
+        <button class="delete-button" th:onclick="|window.location.href='/employee/delete/${employee.id}'|">Delete</button>
+    </div>
+</body>
+</html>

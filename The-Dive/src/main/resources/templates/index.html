@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Dive</title>
+<style>
+body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+           
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .page-heading {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: #333;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+	 margin-top: 20px;
+}
+h2 {
+            text-align: left;
+            color: #333;
+            text-decoration: underline;
+             padding-bottom: 10px;
+        }
+
+th, td {
+	border: 1px solid #ddd;
+	padding: 8px;
+	text-align: left;
+}
+
+th {
+	background-color: #f2f2f2;
+	color: #333;
+}
+
+tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+tr:hover {
+            background-color: #e0e0e0;
+        }
+
+        .add-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #5DADE2 ;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .add-button:hover {
+            background-color:#87CEEB;
+        }
+
+</style>
+</head>
+<body>
+<h1 class="page-heading">The Dive Employee Portal</h1>
+<div class="container">
+
+<h2>Employee's List</h2>
+<button class="add-button"  th:onclick="|window.location.href='/employee/employeeForm'|">Add Employee</button>
+ <table>
+        <thead>
+            <tr>
+                <th>Employee ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Department</th>
+                <th>Reports To</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="employee: ${listEmployees}" th:onclick="|window.location.href='/employee/employeepage/${employee.id}'|" style="cursor: pointer;">
+                <td th:text="${employee.id}"></td>
+                <td th:text="${employee.name}"></td>
+                <td th:text="${employee.email}"></td>
+                <td th:text="${employee.department}"></td>
+                <td th:text="${employee.manager}"></td>
+            </tr>
+        
+        </tbody>
+    </table>
+    </div>
+</body>
+</html>
