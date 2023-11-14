@@ -1,23 +1,25 @@
 package com.bca.springframework.model;
 
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,8 +29,8 @@ import lombok.Setter;
 @Entity
 @Builder
 @NoArgsConstructor
-@AllArgsConstructor 
-public class Employee {
+@AllArgsConstructor
+public class Department {
 	@Id
 	@JdbcTypeCode(SqlTypes.BIGINT)
 	@Column(length = 10, columnDefinition = "bigint(10)")
@@ -40,13 +42,14 @@ public class Employee {
 	@Size(max = 50)
 	private String name;
 	
-	@NotEmpty
-	@Email
-	private String email;
 	
-	@ManyToOne
-	private Department department;
+	@NotNull
+	private String director;
 	
-	private String manager;
+	//@NotEmpty
+		@OneToMany(mappedBy = "department")
+		private Set<Employee> employees = new HashSet<>();
+		
+		private LocalDateTime datecreated;
 	
 }

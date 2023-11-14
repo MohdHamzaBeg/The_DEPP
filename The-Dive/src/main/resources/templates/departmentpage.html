@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Department Details</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>Department Details</h1>
+        <table class="table table-bordered table-hover mt-4">
+            <!-- Table content -->
+            <tbody>
+                <tr>
+                    <th scope="row">Department ID:</th>
+                    <td th:text="${department.id}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Name:</th>
+                    <td th:text="${department.name}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Director:</th>
+                    <td th:text="${department.director}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Created At:</th>
+                    <td th:text="${department.datecreated}"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Button positioned at the rightmost bottom corner of the table -->
+        <div class="position-relative">
+            <button class="btn btn-primary btn-sm position-absolute" style="right: 10px;" th:onclick="|window.location.href='/employee/list/${department.id}'|">List of Employees</button>
+        </div>
+
+        <!-- Other buttons -->
+        <div class="mt-4">
+            <button class="btn btn-primary" th:onclick="|window.location.href='/department/updateform/${department.id}'|">Edit</button>
+            <button class="btn btn-secondary ml-2" th:onclick="|window.location.href='/department/home'|">Back</button>
+            <button class="btn btn-danger ml-2" data-toggle="modal" data-target="#confirmDeleteModal">Delete</button>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal and scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

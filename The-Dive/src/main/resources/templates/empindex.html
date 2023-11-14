@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Dive</title>
+<title>Employees List</title>
 <style>
 body {
             font-family: Arial, sans-serif;
@@ -80,7 +80,6 @@ tr:hover {
 </style>
 </head>
 <body>
-<h1 class="page-heading">The Dive Employee Portal</h1>
 <div class="container">
 
 <h2>Employee's List</h2>
@@ -100,7 +99,7 @@ tr:hover {
                 <td th:text="${employee.id}"></td>
                 <td th:text="${employee.name}"></td>
                 <td th:text="${employee.email}"></td>
-                <td th:text="${employee.department}"></td>
+                <td th:text="${employee.department.name}"></td>
                 <td th:text="${employee.manager}"></td>
             </tr>
         

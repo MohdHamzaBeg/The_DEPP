@@ -1,118 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 50px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            position: relative;
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        /* Added CSS for the table */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px; /* Add margin-top to the table */
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 12px; /* Increase padding for better spacing */
-            text-align: left;
-        }
-
-        th {
-            background-color: #f2f2f2;
-            color: #333;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        tr:hover {
-            background-color: #e0e0e0;
-        }
-        .back-button {
-    	float: right; /* Float the button to the right */
-    	background-color: #5DADE2;
-    	color: white;
-    	border: none;
-    	border-radius: 20px;
-    	padding: 10px 20px;
-    	font-size: 16px;
-    	cursor: pointer;
-    	text-decoration: none;
-}
-		.edit-button, .delete-button{
-    	background-color: #4CAF50;
-    	color: white;
-    	border: none;
-    	border-radius: 20px;
-    	padding: 10px 20px;
-    	font-size: 16px;
-    	cursor: pointer;
-    	text-decoration: none;
-		}
-
-		.edit-button:hover, .delete-button:hover{
-		background-color:#45a049;
-		}
-        .back-button:hover {
-            background-color: #87CEEB;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <title>Employee Details</title>
 </head>
 <body>
-    <div class="container">
+    <div class="container mt-4">
         <h1>Employee Details</h1>
-        <table>
-            <tr>
-                <th>Employee ID:</th>
-                <td th:text="${employee.id}"></td>
-            </tr>
-            <tr>
-                <th>Name:</th>
-                <td th:text="${employee.name}"></td>
-            </tr>
-            <tr>
-                <th>Email:</th>
-                <td th:text="${employee.email}"></td>
-            </tr>
-            <tr>
-                <th>Department:</th>
-                <td th:text="${employee.department}"></td>
-            </tr>
-            <tr>
-                <th>Reports To:</th>
-                <td th:text="${employee.manager}"></td>
-            </tr>
+        <table class="table table-bordered table-hover mt-4">
+            <tbody>
+                <tr>
+                    <th scope="row">Employee ID:</th>
+                    <td th:text="${employee.id}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Name:</th>
+                    <td th:text="${employee.name}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Email:</th>
+                    <td th:text="${employee.email}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Department:</th>
+                    <td th:text="${employee.department.name}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Reports To:</th>
+                    <td th:text="${employee.manager}"></td>
+                </tr>
+            </tbody>
         </table>
-        <br>
-        <br>
-        <button class="edit-button" th:onclick="|window.location.href='/employee/updateform/${employee.id}'|">Edit</button>
-        <button class="back-button" th:onclick="|window.location.href='/employee/home'|">Back</button>
-        <button class="delete-button" th:onclick="|window.location.href='/employee/delete/${employee.id}'|">Delete</button>
+        <div class="mt-4">
+            <button class="btn btn-success" th:onclick="|window.location.href='/employee/updateform/${employee.id}'|">Edit</button>
+            <button class="btn btn-secondary ml-2" th:onclick="|window.location.href='/employee/home'|">Back</button>
+            <button class="btn btn-danger ml-2" data-toggle="modal" data-target="#confirmDeleteModal">Delete</button>
+        </div>
     </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Delete</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this Employee? Click Ok to continue.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-danger" th:href="'/employee/delete/' + ${employee.id}">Ok</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

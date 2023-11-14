@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bca.springframework.model.Department;
 import com.bca.springframework.model.Employee;
+import com.bca.springframework.service.DepartmentService;
 import com.bca.springframework.service.EmployeeService;
 
 import lombok.RequiredArgsConstructor;
@@ -27,15 +29,18 @@ public class EmployeeController {
 	
 	private final EmployeeService employeeService;
 	
-	@GetMapping("/home")
+	private final DepartmentService departmentService;
+	
+	@GetMapping("/list")
 	public String listofEmployees(Model model) {
 		model.addAttribute("listEmployees", employeeService.listofEmployees());
-		return "index";
+		return "empindex";
 	}
 	
 	@GetMapping("/employeeForm")
 	public String employeeForm(Model model) {
 		Employee employee = new Employee();
+		model.addAttribute("departments", departmentService.listofDepartments());
 		model.addAttribute("employee", employee); // Adding the empty employee attribute to the model 
 		return "employeeform"; // so that the form data can be binded to this object using the key "employee"
 	}
@@ -53,14 +58,15 @@ public class EmployeeController {
 	@GetMapping("/updateform/{employeeid}")
 	public String updatepage(@PathVariable("employeeid") long id, Model model) {
 		model.addAttribute("employee", employeeService.getEmployeebyId(id).get());
-		return "updateform";
+		model.addAttribute("departments", departmentService.listofDepartments());
+		return "empupdateform";
 	}
 	@PostMapping("/update")
 	public String updateEmployee(@ModelAttribute("employee") Employee employee) {
 		employeeService.updateEmployee(employee);
-		return "redirect:/employee/employeepage/home";
+		return "redirect:/employee/home";
 	}
-	@DeleteMapping("/delete/{employeeid}")
+	@GetMapping("/delete/{employeeid}")
 	public String deleteEmployee(@PathVariable("employeeid") long id ) {
 		employeeService.deleteEmployee(id);
 		return  "redirect:/employee/home";

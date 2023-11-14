@@ -1,98 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 40px auto; /* Adjusted the margin-top value */
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            position: relative;
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        /* Added CSS for the form */
-        form {
-            padding: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        input[type="text"], select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-
-        .btn-save {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        .btn-save:hover {
-            background-color: #45a049;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <title>New Employee</title>
 </head>
 <body>
     <div class="container">
-        <h1>Add a new Employee</h1>
-        <form method="post" action="/employee/add">
+        <h1 class="text-left mb-4">Add a new Employee</h1>
+        <form id="employeeForm" method="post" action="/employee/add">
             <div class="form-group">
                 <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
+                <input type="text" id="name" name="name" class="form-control" required>
             </div>
             <div class="form-group">
                 <label for="email">Email:</label>
-                <input type="text" id="email" name="email" required>
+                <input type="text" id="email" name="email" class="form-control" required>
             </div>
             <div class="form-group">
                 <label for="department">Department:</label>
-                <select id="department" name="department" required>
-                    <option value="WebDev">WebDev</option>
-                    <option value="Product Support">Product Support</option>
-                    <option value="Cloud Computing">Cloud Computing</option>
-                    <!-- Add more department options as needed -->
+                <select id="department" name="department" class="form-control" required>
+                    <option th:each="dept : ${departments}" th:value="${dept.id}" th:text="${dept.name}"></option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="manager">Manager:</label>
-                <input type="text" id="manager" name="manager">
+                <input type="text" id="manager" name="manager" class="form-control">
             </div>
-            <button class="btn-save" type="submit">Save</button>
+            <button class="btn btn-success" type="button" onclick="showConfirmation()">Save</button>
         </form>
     </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+    <script>
+        function showConfirmation() {
+            if (confirm("Are you sure you want to submit?")) {
+                document.getElementById("employeeForm").submit();
+            }
+        }
+    </script>
 </body>
 </html>
